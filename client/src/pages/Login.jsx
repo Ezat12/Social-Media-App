@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
 
 function Login() {
-  const [content, setContent] = useState("Sign Up");
+  const [content, setContent] = useState("Login");
   const [accept, setAccept] = useState(false);
   const [data, setData] = useState({
     name: "",

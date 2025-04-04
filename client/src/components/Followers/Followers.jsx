@@ -76,13 +76,15 @@ function Followers() {
 
   return (
     <div className="home p-5">
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid md:grid-cols-7 lg:grid-cols-5 gap-4">
         <Sidebar />
-        <div className="col-span-4 p-4 bg-gray-100 min-h-[calc(100vh-125px)]">
-          <div className="flex">
-            <div className="followers w-80">
-              <h2 className="text-lg font-semibold mb-8">Followers:</h2>
-              <div className="flex flex-col gap-3">
+        <div className="lg:col-span-4 md:col-span-5 p-4 bg-gray-100 min-h-[calc(100vh-125px)]">
+          <div className="flex lg:flex-row md:flex-row flex-col">
+            <div className="followers w-70 lg:w-80 md:w-80">
+              <h2 className="text-lg font-semibold lg:mb-8 md:mb-8 mb-2">
+                Followers:
+              </h2>
+              <div className="flex flex-col gap-1 lg:gap-3 md:gap-3">
                 {followers.length > 0 ? (
                   followers.map((u, i) => {
                     return (
@@ -122,9 +124,11 @@ function Followers() {
                 )}
               </div>
             </div>
-            <div className="following w-80 pl-6 border-l border-gray-400 ml-3">
-              <h2 className="text-lg font-semibold mb-8">Following:</h2>
-              <div className="flex flex-col gap-3">
+            <div className="following w-70 lg:w-80 md:w-80 lg:pl-6 md:pl-6 lg:border-l-1 md:border-l-1 border-gray-400 lg:ml-3 md:ml-3 lg:mt-0 md:mt-0 mt-10">
+              <h2 className="text-lg font-semibold lg:mb-8 md:mb-8 mb-2">
+                Following:
+              </h2>
+              <div className="flex flex-col lg:gap-3 md:gap-3">
                 {following.length > 0 ? (
                   following.map((u, i) => {
                     return (
@@ -149,7 +153,7 @@ function Followers() {
                     );
                   })
                 ) : (
-                  <div className="">
+                  <div className="text-center font-semibold">
                     {!loading ? (
                       <p>You are not following anyone</p>
                     ) : (

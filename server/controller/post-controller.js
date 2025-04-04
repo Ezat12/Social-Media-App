@@ -19,6 +19,25 @@ const createPost = asyncHandler(async (req, res, next) => {
 
   const createNewPost = await Post.create(post);
 
+  if (req.body.tags) {
+    const tags = req.body.tags;
+
+    for (let i = 0; i < tags.length; i++) {
+      const notification = {
+        message: `A mention for you ${req.user.name} in the post ${req.user.description}`,
+        type: "tag",
+        post_id: createNewPost._id,
+        user_id: req.user._id,
+      };
+
+      const getUser = await User.findByIdAndUpdate(
+        tags[i],
+        { $push: { notification } },
+        { new: true }
+      );
+    }
+  }
+
   res.status(201).json({ status: "success", data: createNewPost });
 });
 

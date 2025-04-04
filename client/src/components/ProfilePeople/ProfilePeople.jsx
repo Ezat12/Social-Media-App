@@ -76,24 +76,24 @@ function ProfilePeople() {
 
   return (
     <div className="profile-people p-5">
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid md:grid-cols-7 lg:grid-cols-5 gap-4">
         <Sidebar />
-        <div className="col-span-4 px-5 pt-5 bg-gray-100 min-h-[calc(100vh-125px)]">
+        <div className="lg:col-span-4 md:col-span-5 lg:px-5 md:px-5 px-2  lg:pt-5 md:pt-5 pt-2 bg-gray-100 min-h-[calc(100vh-125px)]">
           <div className="bg-white shadow-2xs">
             <div className="container m-auto">
               <div className="image-cover w-full">
                 {user?.coverImage ? (
                   <img
-                    className="h-64 w-full"
+                    className="lg:h-64 h-56 w-full"
                     src={user.coverImage ? user.coverImage : ""}
                   />
                 ) : (
                   <div className="w-full h-60 bg-gray-200"></div>
                 )}
               </div>
-              <div className="flex justify-around items-center pb-8">
+              <div className="flex justify-around flex-wrap gap-5 items-center pb-8">
                 <div className="flex gap-4">
-                  <div className="img-profile w-28 h-28 -mt-4">
+                  <div className="img-profile lg:w-28 lg:h-28 md:w-24 md:h-24 h-20 w-20 lg:-mt-4 md:-mt-3 -mt-1">
                     {!user?.profileImage ? (
                       <img
                         className="rounded-full border-white border-6"
@@ -107,7 +107,7 @@ function ProfilePeople() {
                     )}
                   </div>
                   <div className="flex items-center gap-4">
-                    <div className="flex flex-col mt-5">
+                    <div className="flex flex-col lg:mt-5 md:mt-3 mt-2">
                       <p className="text-2xl font-medium">{user?.name}</p>
                       <div className="flex items-center gap-4 mt-1">
                         <span className="flex items-center gap-2 font-medium text-sm text-gray-600">
@@ -124,11 +124,30 @@ function ProfilePeople() {
                         </span>
                       </div>
                     </div>
+
                     {yourUser?.followers?.includes(user?._id) && (
                       <p className="text-blue-400 text-sm font-medium">
                         Following you
                       </p>
                     )}
+                  </div>
+                </div>
+                <div className="bg-white rounded-lg p-4 lg:hidden">
+                  <h3 className="text-lg font-medium">Brief summary</h3>
+                  <div>
+                    {
+                      <div>
+                        {user?.bio ? (
+                          <div className="font-medium text-center my-5">
+                            {user.bio}
+                          </div>
+                        ) : (
+                          <div className="font-medium my-5 text-center text-gray-600">
+                            Nothing
+                          </div>
+                        )}
+                      </div>
+                    }
                   </div>
                 </div>
                 {user?.followers?.includes(yourUser._id) ? (
@@ -152,12 +171,12 @@ function ProfilePeople() {
           <div className="bg-gray-100">
             <div className="container mx-auto">
               <div className="grid grid-cols-4 gap-5">
-                <div className="col-span-3 flex flex-col gap-4 py-5">
+                <div className="lg:col-span-3 col-span-4  flex flex-col gap-4 py-5">
                   {posts?.map((post, index) => {
                     return <Item key={index} post={post} />;
                   })}
                 </div>
-                <div className="mt-5">
+                <div className="mt-5 lg:block hidden">
                   <div className="bg-white rounded-lg p-4">
                     <h3 className="text-lg font-medium">Brief summary</h3>
                     <div>

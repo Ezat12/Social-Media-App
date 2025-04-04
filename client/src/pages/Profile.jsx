@@ -46,7 +46,6 @@ function Profile() {
         );
         setPosts(response.data.data);
       } catch (e) {
-        console.log(e);
         toast.error("something error");
       }
 
@@ -61,7 +60,6 @@ function Profile() {
         );
         setUsers(responseGetUser.data.users);
       } catch (e) {
-        console.log(e);
         toast.error("something error");
       }
     };
@@ -117,6 +115,7 @@ function Profile() {
       data = { bio };
       if (!bio || bio === user.bio) {
         setShowEditBio(false);
+        setShowEditSummary(false);
         return;
       }
     } else if (name === "imageProfile") {
@@ -154,16 +153,16 @@ function Profile() {
           <div className="image-cover w-full">
             {user.coverImage ? (
               <img
-                className="h-64 w-full"
+                className="lg:h-64 h-56 w-full"
                 src={user.coverImage ? user.coverImage : img_cover}
               />
             ) : (
               <div className="w-full h-60 bg-gray-200"></div>
             )}
           </div>
-          <div className="flex justify-around items-center pb-8">
+          <div className="flex justify-around flex-wrap gap-5 items-center pb-8">
             <div className="flex gap-4">
-              <div className="img-profile w-28 h-28 -mt-4">
+              <div className="img-profile lg:w-28 lg:h-28 md:w-24 md:h-24 h-20 w-20 lg:-mt-4 md:-mt-3 -mt-1">
                 {!user.profileImage ? (
                   <img
                     className="rounded-full border-white border-6"
@@ -176,7 +175,7 @@ function Profile() {
                   />
                 )}
               </div>
-              <div className="flex flex-col mt-5">
+              <div className="flex flex-col lg:mt-5 md:mt-3 mt-2">
                 <p className="text-2xl font-medium">{user.name}</p>
                 <div className="flex items-center gap-4 mt-1">
                   <span className="font-medium text-sm text-gray-600">
@@ -194,6 +193,53 @@ function Profile() {
                 </div>
               </div>
             </div>
+            <div className="bg-white lg:hidden rounded-lg p-2">
+              <h3 className="text-lg font-medium">Brief summary</h3>
+              <div>
+                {!showEditSummary && (
+                  <div>
+                    {user.bio ? (
+                      <div className="font-medium text-center my-2">
+                        {user.bio}
+                      </div>
+                    ) : (
+                      <div className="font-medium my-2 text-center text-gray-600">
+                        Nothing
+                      </div>
+                    )}
+                  </div>
+                )}
+                {showEditSummary && (
+                  <div className="w-full text-center my-2">
+                    <input
+                      value={bio}
+                      onChange={(e) => setBio(e.target.value)}
+                      type="text"
+                      className="border p-4 rounded-lg outline-none "
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="w-full">
+                {showEditSummary ? (
+                  <button
+                    onClick={updateDataUser}
+                    name="bio"
+                    className="p-2 rounded-xl text-center bg-blue-500 text-white w-full font-medium cursor-pointer mt-2"
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setShowEditSummary(true)}
+                    className="p-2 rounded-xl text-center bg-gray-200 w-full font-medium cursor-pointer mt-3"
+                  >
+                    Edit Resume
+                  </button>
+                )}
+              </div>
+            </div>
             <button
               onClick={() => setShowEdit(true)}
               className="w-52 py-3 h-fit text-lg font-medium rounded-lg bg-gray-200 cursor-pointer"
@@ -206,12 +252,12 @@ function Profile() {
       <div className="bg-gray-100">
         <div className="container mx-auto">
           <div className="grid grid-cols-4 gap-5">
-            <div className="col-span-3 flex flex-col gap-4 py-5">
+            <div className="lg:col-span-3 col-span-4  flex flex-col gap-4 py-5">
               {posts.map((post, index) => {
                 return <Item key={index} post={post} />;
               })}
             </div>
-            <div className="mt-5">
+            <div className="mt-5 hidden lg:block">
               <div className="bg-white rounded-lg p-4">
                 <h3 className="text-lg font-medium">Brief summary</h3>
                 <div>

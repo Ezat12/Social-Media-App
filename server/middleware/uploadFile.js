@@ -2,8 +2,6 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(file);
-
     cb(null, "uploads");
   },
   filename: (req, file, cb) => {
@@ -11,7 +9,6 @@ const storage = multer.diskStorage({
     const fileName = `${file.originalname.split(".")[0]}-${uniqueSuffix}.${
       file.mimetype.split("/")[1]
     }`;
-    console.log("fileName", fileName);
 
     cb(null, fileName);
   },

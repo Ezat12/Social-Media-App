@@ -28,10 +28,10 @@ function SavePosts() {
   }, [user]);
 
   return (
-    <div className="home p-5">
-      <div className="grid grid-cols-5 gap-4">
+    <div className="home p-2 lg:p-5 md:lg:p-5">
+      <div className="grid md:grid-cols-7 lg:grid-cols-5 gap-4">
         <Sidebar />
-        <div className="col-span-4 px-5 pt-5 bg-gray-100 min-h-[calc(100vh-125px)]">
+        <div className="lg:col-span-4 md:col-span-5 lg:px-5 md:px-5 px-2  lg:pt-5 md:pt-5 pt-2 bg-gray-100 min-h-[calc(100vh-125px)]">
           <div className="flex flex-col gap-5 h-full">
             {savePosts.length > 0 ? (
               savePosts.map((post) => {

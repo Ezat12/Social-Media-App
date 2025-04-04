@@ -93,6 +93,10 @@ const changePasswordLoggedUser = asyncErrorHandler(async (req, res, next) => {
     { new: true }
   );
 
+  if (!user) {
+    return next(new ApiError("not found user by id", 401));
+  }
+
   res.status(201).json({ msg: "success update password", user });
 });
 

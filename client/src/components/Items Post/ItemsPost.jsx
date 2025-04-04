@@ -39,9 +39,9 @@ function ItemsPost() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-4 p-5">
+    <div className="flex flex-col gap-4 md:p-5 lg:p-5 p-3">
       {posts.map((post, index) => {
-        return <Item key={index} post={post} />;
+        return <Item key={index} id={index} post={post} />;
       })}
     </div>
   );

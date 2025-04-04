@@ -18,7 +18,7 @@ function Sidebar() {
   };
 
   return (
-    <div className="col-span-1">
+    <div className="lg:col-span-1 md:col-span-2 lg:block md:block hidden">
       <ul className="flex flex-col gap-6 w-full">
         <Link
           to="/profile"

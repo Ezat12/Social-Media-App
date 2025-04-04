@@ -79,20 +79,24 @@ const validatorUserIdMongo = [
   validatorError,
 ];
 const validatorChangePasswordUser = [
-  check("password")
+  check("currentPassword")
     .notEmpty()
-    .withMessage("password is required")
+    .withMessage("current password is required")
     .custom(async (val, { req }) => {
       const user = await User.findById(req.user._id);
       const isCorrect = await bcrypt.compare(val, user.password);
 
       if (!user || !isCorrect) {
-        throw new Error("password not correct");
+        throw new Error("current password is not correct");
       }
 
       return true;
     }),
-  check("newPassword").notEmpty().withMessage("new password is required"),
+  check("newPassword")
+    .notEmpty()
+    .withMessage("new password is required")
+    .isLength({ min: 6 })
+    .withMessage("The new password must be greater than 6 char."),
   validatorError,
 ];
 
